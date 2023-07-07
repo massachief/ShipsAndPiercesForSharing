@@ -6,4 +6,5 @@ import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
 
 @Repository
 public interface BerthRepository extends JpaRepository<BerthEntity, Integer> {
+
 }

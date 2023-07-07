@@ -8,7 +8,13 @@ import java.util.Map;
 
 @Service
 public class BerthServiceImpl implements BerthService {
-    private static final Map<Long, BerthEntity> BERTH_REPOSITORY_MAP = new HashMap<>();
+    private static Map<Long, BerthEntity> BERTH_REPOSITORY_MAP = new HashMap<>();
+
+    public static void setMap(Map<Long, BerthEntity> map){
+        if (map == null)
+            throw new RuntimeException();
+        BERTH_REPOSITORY_MAP = map;
+    }
 
     @Override
     public void printAllBerths() {
