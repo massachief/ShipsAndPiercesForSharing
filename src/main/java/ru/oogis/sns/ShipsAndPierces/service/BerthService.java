@@ -5,9 +5,9 @@ import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
 public interface BerthService {
     void printAllBerths();
 
-    void addBertToList(BerthEntity berth);
+    void createBerth(BerthEntity berth);
 
-    void removeBerthFromList(Long id);
+    void deleteBerthEntityFromRepository(Long shipId);
 
     void editBerthInList();
 

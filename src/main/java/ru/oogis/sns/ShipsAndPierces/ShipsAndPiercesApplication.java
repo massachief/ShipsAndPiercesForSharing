@@ -11,7 +11,6 @@ public class ShipsAndPiercesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShipsAndPiercesApplication.class, args);
-		BerthServiceImpl.setMap(null);
 	}
 
 }

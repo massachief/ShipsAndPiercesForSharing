@@ -2,14 +2,16 @@ package ru.oogis.sns.ShipsAndPierces.service;
 
 import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 
+import java.util.Optional;
+
 public interface ShipService {
-    boolean updateShipInList(ShipEntity ship);
+    Optional<ShipEntity> updateShipInList(Long shipId, ShipEntity shipEntity);
 
     void printAllShips();
 
     void addShipToList(ShipEntity shipEntity);
 
-    boolean removeShipFromList(ShipEntity shipEntity);
+    void deleteShipEntityFromRepository(Long shipId);
 
     String createShip(ShipEntity shipEntity);
 }

@@ -2,34 +2,27 @@ package ru.oogis.sns.ShipsAndPierces.service;
 
 import org.springframework.stereotype.Service;
 import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
-
-import java.util.HashMap;
-import java.util.Map;
+import ru.oogis.sns.ShipsAndPierces.data.repository.BerthRepository;
+import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
 
 @Service
 public class BerthServiceImpl implements BerthService {
-    private static Map<Long, BerthEntity> BERTH_REPOSITORY_MAP = new HashMap<>();
-
-    public static void setMap(Map<Long, BerthEntity> map){
-        if (map == null)
-            throw new RuntimeException();
-        BERTH_REPOSITORY_MAP = map;
-    }
-
+    BerthRepository berthRepository;
     @Override
     public void printAllBerths() {
-        System.out.println(BERTH_REPOSITORY_MAP.values());
+        System.out.println(berthRepository);
     }
 
     @Override
-    public void addBertToList(BerthEntity berth) {
+    public void createBerth(BerthEntity berth) {
 
-        BERTH_REPOSITORY_MAP.put(berth.getId(), berth);
     }
 
     @Override
-    public void removeBerthFromList(Long id) {
-        BERTH_REPOSITORY_MAP.remove(id);
+    public void deleteBerthEntityFromRepository(Long shipId) {
+        if (berthRepository.getById(Math.toIntExact(shipId)).getId().equals(shipId)) {
+            berthRepository.deleteById(Math.toIntExact(shipId));
+        } else throw new ResourceNotFoundException("Employee", "id", shipId);
     }
 
     @Override

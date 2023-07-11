@@ -1,19 +1,21 @@
 package ru.oogis.sns.ShipsAndPierces.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import ru.oogis.sns.ShipsAndPierces.data.repository.ShipRepository;
+import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShipServiceImpl implements ShipService {
+    @Autowired
     ShipRepository shipRepository;
-    private static final List<ShipEntity> shipEntityList = null;
 
     @Override
     public void addShipToList(ShipEntity shipEntity) {
-        shipEntityList.add(shipEntity);
+        shipRepository.save(shipEntity);
     }
 
     @Override
@@ -27,18 +29,27 @@ public class ShipServiceImpl implements ShipService {
     }
 
     @Override
-    public boolean removeShipFromList(ShipEntity shipEntity) {
-        return shipEntityList.remove(shipEntity);
+    public void deleteShipEntityFromRepository(Long shipId) {
+        if (shipRepository.getById(Math.toIntExact(shipId)).getId().equals(shipId)) {
+            shipRepository.deleteById(Math.toIntExact(shipId));
+        } else throw new ResourceNotFoundException("Employee", "id", shipId);
     }
 
     @Override
     public void printAllShips() {
-        System.out.println(shipEntityList);
+        System.out.println(shipRepository);
     }
 
     @Override
-    public boolean updateShipInList(ShipEntity shipEntity) {
-        return false;
+    public Optional<ShipEntity> updateShipInList(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
+        Optional<ShipEntity> ship = shipRepository.findById(Math.toIntExact(shipId));
+        if (ship.isEmpty()) {
+            throw new ResourceNotFoundException("Ship", "id", shipId);
+        } else
+            ship.get().setType(shipEntity.getType());
+        ship.get().setName(shipEntity.getName());
+        shipRepository.save(ship.get());
+        return ship;
     }
 
 
