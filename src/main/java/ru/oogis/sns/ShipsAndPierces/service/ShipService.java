@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ShipService {
-    Optional<ShipEntity> updateShipInList(Long shipId, ShipEntity shipEntity);
+    Optional<ShipEntity> updateShipInRepository(Long shipId, ShipEntity shipEntity);
 
     List<ShipEntity> getAllShip();
-
-    void addShipToList(ShipEntity shipEntity);
 
     void deleteShipEntityFromRepository(Long shipId);
 

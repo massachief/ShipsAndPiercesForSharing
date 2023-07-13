@@ -16,11 +16,6 @@ public class ShipServiceImpl implements ShipService {
     ShipRepository shipRepository;
 
     @Override
-    public void addShipToList(ShipEntity shipEntity) {
-        shipRepository.save(shipEntity);
-    }
-
-    @Override
     public ShipEntity createShip(ShipEntity shipEntity) {
         ShipEntity ship = new ShipEntity();
         ship.setId(ship.getId());
@@ -43,7 +38,7 @@ public class ShipServiceImpl implements ShipService {
     }
 
     @Override
-    public Optional<ShipEntity> updateShipInList(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
+    public Optional<ShipEntity> updateShipInRepository(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
         Optional<ShipEntity> ship = shipRepository.findById(shipId);
         if (ship.isEmpty()) {
             throw new ResourceNotFoundException("Ship", "id", shipId);

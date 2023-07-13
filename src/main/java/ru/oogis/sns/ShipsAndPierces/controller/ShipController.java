@@ -3,7 +3,6 @@ package ru.oogis.sns.ShipsAndPierces.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import ru.oogis.sns.ShipsAndPierces.service.ShipService;
 
@@ -29,5 +28,18 @@ public class ShipController {
         ShipEntity newShip = shipService.createShip(shipEntity);
         return new ResponseEntity<>(newShip, HttpStatus.CREATED);
     }
+
+    @PutMapping("/update/{shipId}")
+    public ResponseEntity<ShipEntity> updateShip(@PathVariable Long shipId, @RequestBody ShipEntity shipEntity) {
+        ShipEntity updateShip = shipService.updateShipInRepository(shipId, shipEntity).get();
+        return new ResponseEntity<>(updateShip, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{shipId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long shipId) {
+        shipService.deleteShipEntityFromRepository(shipId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
