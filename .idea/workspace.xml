@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb218e6d-a086-4e29-9a27-f673bf6081d5" name="Changes" comment="Fourth, with exceptions and some service changes">
+    <list default="true" id="eb218e6d-a086-4e29-9a27-f673bf6081d5" name="Changes" comment="Fifth with ShipController">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/controller/BerthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/controller/ShipController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/controller/ShipController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/impl/ShipServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/impl/ShipServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689249225893</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fifth with ShipController">
+      <created>1689249636430</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689249636430</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,6 +225,7 @@
     <MESSAGE value="Second" />
     <MESSAGE value="Third, with exceptions and some service changes" />
     <MESSAGE value="Fourth, with exceptions and some service changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fourth, with exceptions and some service changes" />
+    <MESSAGE value="Fifth with ShipController" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fifth with ShipController" />
   </component>
 </project>

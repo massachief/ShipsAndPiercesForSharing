@@ -36,7 +36,7 @@ public class ShipController {
     }
 
     @DeleteMapping("/delete/{shipId}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long shipId) {
+    public ResponseEntity<?> deleteShip(@PathVariable("id") Long shipId) {
         shipService.deleteShipEntityFromRepository(shipId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
