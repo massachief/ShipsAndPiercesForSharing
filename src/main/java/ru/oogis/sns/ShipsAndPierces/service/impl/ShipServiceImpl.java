@@ -1,11 +1,13 @@
-package ru.oogis.sns.ShipsAndPierces.service;
+package ru.oogis.sns.ShipsAndPierces.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import ru.oogis.sns.ShipsAndPierces.data.repository.ShipRepository;
 import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
+import ru.oogis.sns.ShipsAndPierces.service.ShipService;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,30 +21,30 @@ public class ShipServiceImpl implements ShipService {
     }
 
     @Override
-    public String createShip(ShipEntity shipEntity) {
+    public ShipEntity createShip(ShipEntity shipEntity) {
         ShipEntity ship = new ShipEntity();
         ship.setId(ship.getId());
         ship.setName(ship.getName());
         ship.setType(ship.getType());
         shipRepository.save(ship);
-        return "New Ship created successfully";
+        return ship;
     }
 
     @Override
     public void deleteShipEntityFromRepository(Long shipId) {
-        if (shipRepository.getById(Math.toIntExact(shipId)).getId().equals(shipId)) {
-            shipRepository.deleteById(Math.toIntExact(shipId));
+        if (shipRepository.getById(shipId).getId().equals(shipId)) {
+            shipRepository.deleteById(shipId);
         } else throw new ResourceNotFoundException("Employee", "id", shipId);
     }
 
     @Override
-    public void printAllShips() {
-        System.out.println(shipRepository);
+    public List<ShipEntity> getAllShip() {
+        return shipRepository.findAll();
     }
 
     @Override
     public Optional<ShipEntity> updateShipInList(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
-        Optional<ShipEntity> ship = shipRepository.findById(Math.toIntExact(shipId));
+        Optional<ShipEntity> ship = shipRepository.findById(shipId);
         if (ship.isEmpty()) {
             throw new ResourceNotFoundException("Ship", "id", shipId);
         } else

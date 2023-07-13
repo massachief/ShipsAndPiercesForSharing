@@ -38,6 +38,9 @@ public class BerthEntity {
     public List<ShipEntity> getShipEntityArrayList() {
         return shipEntityArrayList;
     }
+    public void addShip(ShipEntity shipEntity){
+        shipEntityArrayList.add(shipEntity);
+    }
 
     @Override
     public String toString() {

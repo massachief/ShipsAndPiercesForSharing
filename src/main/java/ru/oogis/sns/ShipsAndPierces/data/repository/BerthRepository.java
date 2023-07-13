@@ -5,6 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
 
 @Repository
-public interface BerthRepository extends JpaRepository<BerthEntity, Integer> {
-
+public interface BerthRepository extends JpaRepository<BerthEntity, Long> {
 }

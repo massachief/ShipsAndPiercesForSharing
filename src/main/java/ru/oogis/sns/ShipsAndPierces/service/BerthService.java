@@ -1,23 +1,29 @@
 package ru.oogis.sns.ShipsAndPierces.service;
 
 import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
+import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface BerthService {
-    void printAllBerths();
+    List<BerthEntity> getAllBerth();
 
-    void createBerth(BerthEntity berth);
+    BerthEntity createBerth(BerthEntity berthEntity);
 
-    void deleteBerthEntityFromRepository(Long shipId);
+    void deleteBerthEntityFromRepository(Long berthId);
 
-    void editBerthInList();
+    Optional<BerthEntity> updateBerthEntity(Long berthId, BerthEntity berthEntity);
 
-    void getListOfBerthInCity();
+    List<BerthEntity> getListOfBerthInCity(String location);
 
-    void getAmountShipsInBerth();
+    int getAmountShipsInBerth(BerthEntity berth);
 
-    void getListOfEachShipInCity();
+    BerthEntity getBerthById(Long berthId) throws ResourceNotFoundException;
 
-    void connectShipToBerthByID(Long id);
+    List<BerthEntity> getListOfEachShipInCity(String location);
 
-    void removeShipFromBerthByID(Long id);
+    void connectShipToBerthByID(Long shipId, Long berthId);
+
+    void removeShipFromBerthByID(Long shipId, Long berthId);
 }

@@ -6,5 +6,5 @@ import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ShipRepository extends JpaRepository<ShipEntity, Integer> {
+public interface ShipRepository extends JpaRepository<ShipEntity, Long> {
 }

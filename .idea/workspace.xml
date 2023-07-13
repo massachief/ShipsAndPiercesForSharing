@@ -4,20 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb218e6d-a086-4e29-9a27-f673bf6081d5" name="Changes" comment="Second">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/exeption/ResourceNotFoundException.java" afterDir="false" />
+    <list default="true" id="eb218e6d-a086-4e29-9a27-f673bf6081d5" name="Changes" comment="Third, with exceptions and some service changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/controller/ShipController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/impl/BerthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/ShipsAndPiercesApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/ShipsAndPiercesApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/controller/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/entity/BerthEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/entity/BerthEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/repository/BerthRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/repository/BerthRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/repository/ShipRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/data/repository/ShipRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/BerthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/BerthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/BerthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/BerthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/BerthServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/ShipsAndPiercesApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/ShipsAndPiercesApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/ShipServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/oogis/sns/ShipsAndPierces/service/impl/ShipServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/controller/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/controller/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/model/Berth.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/model/Ship.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/oogis/sns/ShipsAndPierces/model/ShipType.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +78,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ru.oogis.sns.ShipsAndPierces.controller" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="ShipsAndPiercesApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.oogis.sns.ShipsAndPierces.ShipsAndPiercesApplication" />
@@ -121,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688735824201</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Third, with exceptions and some service changes">
+      <created>1689081894056</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1689081894056</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,6 +220,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Firtst" />
     <MESSAGE value="Second" />
-    <option name="LAST_COMMIT_MESSAGE" value="Second" />
+    <MESSAGE value="Third, with exceptions and some service changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Third, with exceptions and some service changes" />
   </component>
 </project>
