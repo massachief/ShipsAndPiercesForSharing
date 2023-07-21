@@ -3,21 +3,28 @@ package ru.oogis.sns.ShipsAndPierces.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
+import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import ru.oogis.sns.ShipsAndPierces.data.repository.BerthRepository;
 import ru.oogis.sns.ShipsAndPierces.data.repository.ShipRepository;
 import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
 import ru.oogis.sns.ShipsAndPierces.service.BerthService;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BerthServiceImpl implements BerthService {
+    public BerthServiceImpl(BerthRepository berthRepository, ShipRepository shipRepository) {
+        this.berthRepository = berthRepository;
+        this.shipRepository = shipRepository;
+    }
     @Autowired
-    BerthRepository berthRepository;
-    ShipRepository shipRepository;
+    private final BerthRepository berthRepository;
+    @Autowired
+    private final ShipRepository shipRepository;
 
     @Override
     public List<BerthEntity> getAllBerth() {
@@ -36,23 +43,20 @@ public class BerthServiceImpl implements BerthService {
 
     @Override
     public void deleteBerthEntityFromRepository(Long berthId) {
-        if (berthRepository.getById(berthId).getId().equals(berthId)) {
+        if (berthRepository.getReferenceById(berthId).getId().equals(berthId)) {
             berthRepository.deleteById(berthId);
-        } else throw new ResourceNotFoundException("Employee", "id", berthId);
+        } else throw new ResourceNotFoundException("Ship", "id", berthId);
     }
 
     @Override
     public Optional<BerthEntity> updateBerthEntity(Long berthId, BerthEntity berthEntity) {
         Optional<BerthEntity> berth = berthRepository.findById(berthId);
         if (berth.isEmpty())
-            throw new ResourceNotFoundException("Ship", "id", berthId);
-
+            throw new ResourceNotFoundException("Berth", "id", berthId);
         berth.get().setShipEntityArrayList(berthEntity.getShipEntityArrayList());
         berth.get().setLocationCity(berthEntity.getLocationCity());
         berthRepository.save(berth.get());
-
         return berth;
-
     }
 
 
@@ -63,45 +67,40 @@ public class BerthServiceImpl implements BerthService {
 
     public BerthEntity getBerthById(Long berthId) throws ResourceNotFoundException {
         return berthRepository.findById(berthId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", berthId));
+                .orElseThrow(() -> new ResourceNotFoundException("Berth", "id", berthId));
     }
 
     @Override
     public List<BerthEntity> getListOfBerthInCity(String location) {
-        List<BerthEntity> entityList = berthRepository.findAll();
-        List<BerthEntity> returnList = new ArrayList<>();
-        for (BerthEntity berthEntity : entityList) {
-            if (Objects.equals(berthEntity.locationCity.toLowerCase(), location.toLowerCase())) {
-                returnList.add(berthEntity);
-            }
-        }
-        return returnList;
+        if (location == null || location.isEmpty())
+            return Collections.emptyList();
+        return berthRepository.findAll().stream()
+                .filter(berthEntity -> location.equals(berthEntity.getLocationCity()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<BerthEntity> getListOfEachShipInCity(String location) {
-        List<BerthEntity> entityList = berthRepository.findAll();
-        List<BerthEntity> returnList = new ArrayList<>();
-        for (BerthEntity berthEntity : entityList) {
-            {
-                if (Objects.equals(berthEntity.locationCity, location)) {
-                    returnList.add((BerthEntity) berthEntity.shipEntityArrayList);
-                }
-            }
-        }
-        return returnList;
+    public List<ShipEntity> getListOfEachShipInCity(String location) {
+        if (location == null || location.isEmpty())
+            return Collections.emptyList();
+        return berthRepository.findAll().stream()
+                .filter(berthEntity -> location.equals(berthEntity.getLocationCity()))
+                .map(BerthEntity::getShipEntityArrayList)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 
 
     @Override
     public void connectShipToBerthByID(Long shipId, Long berthId) {
-        berthRepository.findById(berthId).get().
-                addShip(shipRepository.getReferenceById(shipId));
+        berthRepository.getReferenceById(berthId).
+                addShip(shipRepository.getReferenceById(berthId));
     }
 
     @Override
     public void removeShipFromBerthByID(Long shipId, Long berthId) {
-        berthRepository.findById(berthId).get()
-                .shipEntityArrayList.remove(shipRepository.getReferenceById(shipId));
+        berthRepository.getReferenceById(berthId)
+                .getShipEntityArrayList().remove(shipRepository.getReferenceById(shipId));
     }
+
 }

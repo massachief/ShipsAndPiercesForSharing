@@ -1,16 +1,18 @@
 package ru.oogis.sns.ShipsAndPierces.data.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
-
+@Entity
 public class BerthEntity {
-    private @Id
-    @GeneratedValue Long id;
-    public String locationCity;
-    public List<ShipEntity> shipEntityArrayList;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String locationCity;
+    private List<ShipEntity> shipEntityArrayList;
 
     public BerthEntity() {
     }
@@ -38,7 +40,8 @@ public class BerthEntity {
     public List<ShipEntity> getShipEntityArrayList() {
         return shipEntityArrayList;
     }
-    public void addShip(ShipEntity shipEntity){
+
+    public void addShip(ShipEntity shipEntity) {
         shipEntityArrayList.add(shipEntity);
     }
 
@@ -46,8 +49,18 @@ public class BerthEntity {
     public String toString() {
         return "BerthEntity{" + "id=" + id + ", locationCity=" + locationCity + '\'' + ", Ships in Berth=" + shipEntityArrayList + '}';
     }
+
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(id, locationCity, shipEntityArrayList);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BerthEntity berth = (BerthEntity) o;
+        return Double.compare(berth.id, id) == 0 && Objects.equals(id, berth.id) &&
+                Objects.equals(locationCity, berth.locationCity) &&
+                Objects.equals(shipEntityArrayList, berth.shipEntityArrayList);
     }
 }

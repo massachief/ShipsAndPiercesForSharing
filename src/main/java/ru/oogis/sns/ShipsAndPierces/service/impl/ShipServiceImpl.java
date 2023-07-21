@@ -13,7 +13,11 @@ import java.util.Optional;
 @Service
 public class ShipServiceImpl implements ShipService {
     @Autowired
-    ShipRepository shipRepository;
+    private final ShipRepository shipRepository;
+
+    public ShipServiceImpl(ShipRepository shipRepository) {
+        this.shipRepository = shipRepository;
+    }
 
     @Override
     public ShipEntity createShip(ShipEntity shipEntity) {
@@ -27,9 +31,9 @@ public class ShipServiceImpl implements ShipService {
 
     @Override
     public void deleteShipEntityFromRepository(Long shipId) {
-        if (shipRepository.getById(shipId).getId().equals(shipId)) {
+        if (shipId.equals(shipRepository.getReferenceById(shipId).getId())) {
             shipRepository.deleteById(shipId);
-        } else throw new ResourceNotFoundException("Employee", "id", shipId);
+        } else throw new ResourceNotFoundException("Ship", "id", shipId);
     }
 
     @Override
@@ -40,14 +44,12 @@ public class ShipServiceImpl implements ShipService {
     @Override
     public Optional<ShipEntity> updateShipInRepository(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
         Optional<ShipEntity> ship = shipRepository.findById(shipId);
-        if (ship.isEmpty()) {
+        if (ship.isEmpty())
             throw new ResourceNotFoundException("Ship", "id", shipId);
-        } else
-            ship.get().setType(shipEntity.getType());
+
+        ship.get().setType(shipEntity.getType());
         ship.get().setName(shipEntity.getName());
         shipRepository.save(ship.get());
         return ship;
     }
-
-
 }

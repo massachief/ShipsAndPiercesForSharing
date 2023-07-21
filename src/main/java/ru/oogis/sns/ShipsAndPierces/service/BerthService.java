@@ -1,11 +1,14 @@
 package ru.oogis.sns.ShipsAndPierces.service;
 
+import org.springframework.stereotype.Component;
 import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
+import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public interface BerthService {
     List<BerthEntity> getAllBerth();
 
@@ -21,7 +24,7 @@ public interface BerthService {
 
     BerthEntity getBerthById(Long berthId) throws ResourceNotFoundException;
 
-    List<BerthEntity> getListOfEachShipInCity(String location);
+    List<ShipEntity> getListOfEachShipInCity(String location);
 
     void connectShipToBerthByID(Long shipId, Long berthId);
 

@@ -1,16 +1,14 @@
 package ru.oogis.sns.ShipsAndPierces.data.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-
+import javax.persistence.*;
 import java.util.Objects;
-
+@Entity
 public class ShipEntity {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
-
+    @Enumerated(EnumType.STRING)
     private ShipType type;
 
     public ShipEntity() {

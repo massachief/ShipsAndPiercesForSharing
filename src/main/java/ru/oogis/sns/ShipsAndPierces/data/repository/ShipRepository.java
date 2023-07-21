@@ -1,10 +1,9 @@
 package ru.oogis.sns.ShipsAndPierces.data.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Repository
 public interface ShipRepository extends JpaRepository<ShipEntity, Long> {
 }
