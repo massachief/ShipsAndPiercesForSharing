@@ -1,13 +1,16 @@
-package ru.oogis.sns.ShipsAndPierces.data.entity;
+package ru.oogis.sns.ships.data.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
+@Table
 @Entity
 public class ShipEntity {
     @Id
     @GeneratedValue
     private Long id;
+    @Column
     private String name;
+    @Column
     @Enumerated(EnumType.STRING)
     private ShipType type;
 

@@ -1,12 +1,11 @@
-package ru.oogis.sns.ShipsAndPierces.service;
+package ru.oogis.sns.ships.service;
 
 import org.springframework.stereotype.Component;
-import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
-import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
-import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
+import ru.oogis.sns.ships.data.entity.BerthEntity;
+import ru.oogis.sns.ships.data.entity.ShipEntity;
+import ru.oogis.sns.ships.exeption.ResourceNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public interface BerthService {
@@ -16,7 +15,7 @@ public interface BerthService {
 
     void deleteBerthEntityFromRepository(Long berthId);
 
-    Optional<BerthEntity> updateBerthEntity(Long berthId, BerthEntity berthEntity);
+    BerthEntity updateBerthEntity(Long berthId, BerthEntity berthEntity);
 
     List<BerthEntity> getListOfBerthInCity(String location);
 

@@ -1,18 +1,17 @@
-package ru.oogis.sns.ShipsAndPierces.controller;
+package ru.oogis.sns.ships.controller;
 
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
-import ru.oogis.sns.ShipsAndPierces.service.ShipService;
+import ru.oogis.sns.ships.data.entity.ShipEntity;
+import ru.oogis.sns.ships.service.ShipService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/ships")
-//Line 19 to 24 is the newly added code for swagger documentation
 @ApiResponses(value = {
         @io.swagger.annotations.ApiResponse(code = 400, message =
                 "This is a bad request, please follow the API documentation for the proper request format"),
@@ -23,6 +22,7 @@ import java.util.List;
 }
 )
 public class ShipController {
+    @Autowired
     private final ShipService shipService;
 
     public ShipController(ShipService shipService) {
@@ -43,8 +43,7 @@ public class ShipController {
 
     @PutMapping("/update/{shipId}")
     public ResponseEntity<ShipEntity> updateShip(@PathVariable Long shipId, @RequestBody ShipEntity shipEntity) {
-        ShipEntity updateShip = shipService.updateShipInRepository(shipId, shipEntity).get();
-        return new ResponseEntity<>(updateShip, HttpStatus.OK);
+        return ResponseEntity.ok(shipService.updateShipInRepository(shipId, shipEntity));
     }
 
     @DeleteMapping("/delete/{shipId}")

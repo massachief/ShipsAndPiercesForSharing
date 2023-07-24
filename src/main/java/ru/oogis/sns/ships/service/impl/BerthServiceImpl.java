@@ -1,26 +1,27 @@
-package ru.oogis.sns.ShipsAndPierces.service.impl;
+package ru.oogis.sns.ships.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
-import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
-import ru.oogis.sns.ShipsAndPierces.data.repository.BerthRepository;
-import ru.oogis.sns.ShipsAndPierces.data.repository.ShipRepository;
-import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
-import ru.oogis.sns.ShipsAndPierces.service.BerthService;
+import ru.oogis.sns.ships.data.entity.BerthEntity;
+import ru.oogis.sns.ships.data.entity.ShipEntity;
+import ru.oogis.sns.ships.data.repository.BerthRepository;
+import ru.oogis.sns.ships.data.repository.ShipRepository;
+import ru.oogis.sns.ships.exeption.ResourceNotFoundException;
+import ru.oogis.sns.ships.service.BerthService;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class BerthServiceImpl implements BerthService {
-    public BerthServiceImpl(BerthRepository berthRepository, ShipRepository shipRepository) {
+
+    BerthServiceImpl(BerthRepository berthRepository, ShipRepository shipRepository) {
         this.berthRepository = berthRepository;
         this.shipRepository = shipRepository;
     }
+
     @Autowired
     private final BerthRepository berthRepository;
     @Autowired
@@ -43,19 +44,19 @@ public class BerthServiceImpl implements BerthService {
 
     @Override
     public void deleteBerthEntityFromRepository(Long berthId) {
-        if (berthRepository.getReferenceById(berthId).getId().equals(berthId)) {
+        if (berthRepository.getById(berthId).getId().equals(berthId)) {
             berthRepository.deleteById(berthId);
         } else throw new ResourceNotFoundException("Ship", "id", berthId);
     }
 
     @Override
-    public Optional<BerthEntity> updateBerthEntity(Long berthId, BerthEntity berthEntity) {
-        Optional<BerthEntity> berth = berthRepository.findById(berthId);
-        if (berth.isEmpty())
-            throw new ResourceNotFoundException("Berth", "id", berthId);
-        berth.get().setShipEntityArrayList(berthEntity.getShipEntityArrayList());
-        berth.get().setLocationCity(berthEntity.getLocationCity());
-        berthRepository.save(berth.get());
+    public BerthEntity updateBerthEntity(Long berthId, BerthEntity berthEntity) {
+        BerthEntity berth = berthRepository.findById(berthId)
+                .orElseThrow(() -> new ResourceNotFoundException("Berth", "id", berthId));
+
+        berth.setShipEntityArrayList(berthEntity.getShipEntityArrayList());
+        berth.setLocationCity(berthEntity.getLocationCity());
+        berthRepository.save(berth);
         return berth;
     }
 
@@ -93,14 +94,14 @@ public class BerthServiceImpl implements BerthService {
 
     @Override
     public void connectShipToBerthByID(Long shipId, Long berthId) {
-        berthRepository.getReferenceById(berthId).
-                addShip(shipRepository.getReferenceById(berthId));
+        berthRepository.getById(berthId).
+                addShip(shipRepository.getById(berthId));
     }
 
     @Override
     public void removeShipFromBerthByID(Long shipId, Long berthId) {
-        berthRepository.getReferenceById(berthId)
-                .getShipEntityArrayList().remove(shipRepository.getReferenceById(shipId));
+        berthRepository.getById(berthId)
+                .getShipEntityArrayList().remove(shipRepository.getById(shipId));
     }
 
 }

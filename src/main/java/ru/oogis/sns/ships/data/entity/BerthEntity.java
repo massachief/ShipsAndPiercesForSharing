@@ -1,17 +1,19 @@
-package ru.oogis.sns.ShipsAndPierces.data.entity;
+package ru.oogis.sns.ships.data.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
+
+@Table
 @Entity
 public class BerthEntity {
     @Id
     @GeneratedValue
     private Long id;
+    @Column
     private String locationCity;
+    @OneToMany
     private List<ShipEntity> shipEntityArrayList;
 
     public BerthEntity() {
@@ -54,6 +56,7 @@ public class BerthEntity {
     public int hashCode() {
         return Objects.hash(id, locationCity, shipEntityArrayList);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

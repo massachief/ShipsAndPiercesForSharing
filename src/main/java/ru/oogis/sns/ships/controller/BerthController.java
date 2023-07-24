@@ -1,18 +1,18 @@
-package ru.oogis.sns.ShipsAndPierces.controller;
+package ru.oogis.sns.ships.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.oogis.sns.ShipsAndPierces.data.entity.BerthEntity;
-import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
-import ru.oogis.sns.ShipsAndPierces.service.BerthService;
+import ru.oogis.sns.ships.data.entity.BerthEntity;
+import ru.oogis.sns.ships.service.BerthService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/berths")
 public class BerthController {
+    @Autowired
     private final BerthService berthService;
 
     public BerthController(BerthService berthService) {
@@ -33,9 +33,7 @@ public class BerthController {
 
     @PutMapping("/update/{berthId}")
     public ResponseEntity<BerthEntity> updateBerth(@PathVariable Long berthId, @RequestBody BerthEntity berthEntity) {
-        BerthEntity updateBerth = berthService.updateBerthEntity(berthId, berthEntity).
-                orElseThrow(() -> new ResourceNotFoundException("Berth", "id", berthId));
-        return new ResponseEntity<>(updateBerth, HttpStatus.OK);
+        return ResponseEntity.ok(berthService.updateBerthEntity(berthId, berthEntity));
     }
 
     @DeleteMapping("/delete/{berthId}")

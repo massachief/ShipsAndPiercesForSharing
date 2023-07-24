@@ -1,14 +1,13 @@
-package ru.oogis.sns.ShipsAndPierces.service.impl;
+package ru.oogis.sns.ships.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.oogis.sns.ShipsAndPierces.data.entity.ShipEntity;
-import ru.oogis.sns.ShipsAndPierces.data.repository.ShipRepository;
-import ru.oogis.sns.ShipsAndPierces.exeption.ResourceNotFoundException;
-import ru.oogis.sns.ShipsAndPierces.service.ShipService;
+import ru.oogis.sns.ships.data.entity.ShipEntity;
+import ru.oogis.sns.ships.data.repository.ShipRepository;
+import ru.oogis.sns.ships.exeption.ResourceNotFoundException;
+import ru.oogis.sns.ships.service.ShipService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShipServiceImpl implements ShipService {
@@ -31,7 +30,7 @@ public class ShipServiceImpl implements ShipService {
 
     @Override
     public void deleteShipEntityFromRepository(Long shipId) {
-        if (shipId.equals(shipRepository.getReferenceById(shipId).getId())) {
+        if (shipId.equals(shipRepository.getById(shipId).getId())) {
             shipRepository.deleteById(shipId);
         } else throw new ResourceNotFoundException("Ship", "id", shipId);
     }
@@ -42,14 +41,14 @@ public class ShipServiceImpl implements ShipService {
     }
 
     @Override
-    public Optional<ShipEntity> updateShipInRepository(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
-        Optional<ShipEntity> ship = shipRepository.findById(shipId);
-        if (ship.isEmpty())
-            throw new ResourceNotFoundException("Ship", "id", shipId);
+    public ShipEntity updateShipInRepository(Long shipId, ShipEntity shipEntity) throws ResourceNotFoundException {
 
-        ship.get().setType(shipEntity.getType());
-        ship.get().setName(shipEntity.getName());
-        shipRepository.save(ship.get());
+        ShipEntity ship = shipRepository.findById(shipId)
+                .orElseThrow(() -> new ResourceNotFoundException("Ship", "id", shipId));
+
+        ship.setType(shipEntity.getType());
+        ship.setName(shipEntity.getName());
+        shipRepository.save(ship);
         return ship;
     }
 }
